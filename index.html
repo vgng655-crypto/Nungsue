@@ -103,6 +103,8 @@
             position: relative;
             text-align: center;
             animation: fadeIn 0.3s ease;
+            max-width: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes fadeIn {
@@ -112,12 +114,16 @@
 
         .close-btn {
             position: absolute;
-            right: 20px;
+            right: 15px;
             top: 10px;
-            font-size: 28px;
+            font-size: 30px;
             font-weight: bold;
             cursor: pointer;
-            color: #888;
+            color: #000;
+            background: wheat;
+            border-radius: 50%;
+            padding: 0 10px;
+            z-index: 1001;
         }
 
         .modal-img {
