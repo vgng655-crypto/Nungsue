@@ -309,6 +309,28 @@ h2:contains("💎") {
 .main-footer h2 {
     font-size: 20px;
 }
+.category-menu {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.category-menu button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #36d1dc, #5b86e5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.category-menu button:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
 
 </style>
 </head>
@@ -317,7 +339,16 @@ h2:contains("💎") {
 <header class="main-header">
     <h1>🛍️ ຫນ້າລວມສິນຄ້າ</h1>
     <p>👇 ກົດຄິກເພື່ອເບິ່ງສິນຄ້າ</p>
-</header>>
+</header>><div class="category-menu">
+    <button onclick="goHome()" style="background:red;">
+⬅️ กลับหน้าแรก
+</button>
+
+    <button onclick="showZone('game')">🎮 เกม</button>
+    <button onclick="showZone('app')">📱 แอป</button>
+    <button onclick="showZone('topup')">💎 เติมเกม</button>
+
+</div>
 
 <h2 class="game-title">🎮 (Game) ເກມພີມ່ຽມ ສຸດຄຸ້ມ</h2>
 <div class="product-grid" id="gameZone"></div>
@@ -358,6 +389,50 @@ h2:contains("💎") {
 </footer>
 
 <script>
+    function showZone(type) {
+
+    const game = document.getElementById("gameZone");
+    const app = document.getElementById("appZone");
+    const topup = document.getElementById("topupZone");
+
+    const gameTitle = document.querySelector(".game-title");
+    const appTitle = document.querySelector(".app-title");
+    const topupTitle = document.querySelector(".topup-title");
+
+    // ซ่อนทั้งหมดก่อน
+    game.style.display = "none";
+    app.style.display = "none";
+    topup.style.display = "none";
+
+    gameTitle.style.display = "none";
+    appTitle.style.display = "none";
+    topupTitle.style.display = "none";
+
+    // แสดงเฉพาะที่เลือก
+    if (type === "game") {
+        game.style.display = "grid";
+        gameTitle.style.display = "block";
+    }
+
+    if (type === "app") {
+        app.style.display = "grid";
+        appTitle.style.display = "block";
+    }
+
+    if (type === "topup") {
+        topup.style.display = "grid";
+        topupTitle.style.display = "block";
+    }
+}
+function goHome() {
+    document.getElementById("gameZone").style.display = "grid";
+    document.getElementById("appZone").style.display = "grid";
+    document.getElementById("topupZone").style.display = "grid";
+
+    document.querySelector(".game-title").style.display = "block";
+    document.querySelector(".app-title").style.display = "block";
+    document.querySelector(".topup-title").style.display = "block";
+}
     // 1. ข้อมูลสินค้า (คุณสามารถเพิ่ม/แก้ไข ตรงนี้ได้เลย)
     const products = [
         {
