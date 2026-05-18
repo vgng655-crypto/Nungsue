@@ -38,10 +38,11 @@
 
         /* ระบบ Grid */
         .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 220px));
+    gap: 10px;
+    justify-content: start;
+}
 
         .product-card {
             background: #f7f3f3;
@@ -331,8 +332,45 @@ h2:contains("💎") {
     transform: scale(1.05);
     transition: 0.2s;
 }
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .product-image { height: 140px; }
+  .category-menu button {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+}
+.search-wrap {
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.search-wrap input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.8rem;
+  border-radius: 50px;
+  border: 2px solid #36d1dc;
+  background: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
 
 </style>
+
 </head>
 <body>
 
@@ -341,8 +379,12 @@ h2:contains("💎") {
     <p>👇 ກົດຄິກເພື່ອເບິ່ງສິນຄ້າ</p>
 </header>><div class="category-menu">
     <button onclick="goHome()" style="background:red;">
-⬅️ ກັບໄປຫນ້າຫລັກ
+⬅️ ສີນຄ້າທັ້ງຫມົດ
 </button>
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input type="text" id="searchInput" placeholder="ຄົ້ນຫາສິນຄ້າ..." oninput="filterProducts()">
+</div>
 
     <button onclick="showZone('game')">🎮 (Game) ເກມພີມ່ຽມ ສຸດຄຸ້ມ</button>
     <button onclick="showZone('app')">📱 (App) ແອັບພີມ່ຽມ ສຸດຄຸ້ມ</button>
@@ -658,6 +700,13 @@ products.forEach(product => {
             closeModal();
         }
     }
+    function filterProducts() {
+  const q = document.getElementById("searchInput").value.toLowerCase();
+  document.querySelectorAll(".product-card").forEach(card => {
+    const name = card.querySelector(".product-price").textContent.toLowerCase();
+    card.style.display = name.includes(q) ? "" : "none";
+  });
+}
 </script>
 
 </body>
