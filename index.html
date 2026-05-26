@@ -45,29 +45,57 @@
 }
 
         .product-card {
-            background: #f7f3f3;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer; /* เปลี่ยนเมาส์เป็นรูปมือ */
-            
-        }
+    background: #f7f3f3;
+    border-radius: 8px;
+    overflow: visible;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 6px
+    
+}
+
+.product-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    
+    border-radius: 20px;
+    padding: 3px;
+    background: conic-gradient(from var(--angle, 0deg), #ff6ec7, #ffcc44, #43e97b, #38f9d7, #667eea, #ff6ec7);
+    animation: spinBorder 3s linear infinite;
+    box-shadow: none;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes spinBorder {
+    to { --angle: 360deg; }
+}
+
+.product-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius:17px;
+}
 
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: contain;
-            object-position: center;
-            border-radius: 10px;
-        }
+       
 
         .product-info {
             padding: 10px;
@@ -151,10 +179,13 @@
 
         .modal-img {
             width: 100%;
-            max-height: 300px;
-            object-fit: contain;
-            margin-bottom: 1rem;
-            border-radius: 8px;
+            max-width: 350px;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            
+            border-radius: 18px;
+            display: block;
+            margin: 0 auto 1rem;
         }
 
         .modal-desc {
@@ -201,7 +232,7 @@
 }
 
 .product-card {
-    padding: 0 !important;
+    padding: 6px !important;
 }.zone-title {
     padding: 10px 15px;
     border-radius: 10px;
@@ -386,7 +417,7 @@ h2:contains("💎") {
         <hr style="margin: 1.5rem 0; border: 0.5px solid #eee;">
         <p>ສົນໃຈຊື້ສິນຄ້ານີ້?</p>
         <div class="contact-buttons">
-            <a href="https://wa.me/8562099340962" class="btn whatsapp">ສັ່ງຊື້ທາງ WhatsApp</a>
+            <a href="https://wa.me/66649069984" class="btn whatsapp">ສັ່ງຊື້ທາງ WhatsApp</a>
         </div>
     </div>
 </div>
@@ -395,11 +426,11 @@ h2:contains("💎") {
     <h2>📞 ຕິດຕໍ່ສອບຖາມ / ສັ່ງຊື້</h2>
 </footer>
         <div class="contact-buttons">
-            <a href="https://www.facebook.com/share/1CPYCaEVwc/" target="_blank" class="btn facebook">Facebook </a>
+            <a href="https://www.facebook.com/share/1GYzCxUQNF/" target="_blank" class="btn facebook">Facebook </a>
             
         </div>
         <div class="contact-buttons">
-            <a href="https://wa.me/8562099340962" class="btn whatsapp">WhatsApp</a>
+            <a href="https://wa.me/66649069984" class="btn whatsapp">WhatsApp</a>
         </div>
     </div>
 </footer>
@@ -457,7 +488,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "Minecraf",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ minecraft",
-            image: "https://www.image2url.com/r2/default/images/1777198435852-148c0a8a-ec92-4b49-b427-0e24dc2de1e5.jpg",
+            image: "https://cdn.phototourl.com/free/2026-05-26-9a7c1685-1022-48c8-8e6c-ebd14c8f5a8f.jpg",
             description: "ລາຄາ Minecraft\n -ເມວຮ້ານ=10.000₭\n -ກົດຊື້ໃສ່ເມວລູກຄ້າ=99.000₭\n!ລາຍລະອຽດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນຫລາຍຄົນບໍມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ:ແມ່ນການຊື້ໂຕເກມນັ້ນໃສ່ ເມວ/ໄອດີລູກຄ້າ  "
         },
         {
@@ -466,7 +497,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "Terraria ",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ terraria",
-            image: "https://cdn.phototourl.com/free/2026-04-26-d4219d9a-e282-454a-bcdd-0cb777cd0f60.jpg",
+            image: "https://cdn.phototourl.com/free/2026-05-26-ed670a94-16a3-48b7-8e0b-06a636f256fd.jpg",
             description: "ລາຄາ Terraria\n-ເມວຮ້ານ=10.000₭\n-ກົດໃສ່ຊື້ໃສ່ລູກຄ້າເມວ=150.000₭\n!ລາຍລະອຽດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນຫລາຍຄົນບໍມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ:ແມ່ນການຊື້ໂຕເກມນັ້ນໃສ່ ເມວ/ໄອດີລູກຄ້າ "
         },
          {
@@ -475,7 +506,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "Stardew valley",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ stardew valley",
-            image: "https://cdn.phototourl.com/free/2026-04-26-50fb963b-426f-4785-ac80-7a8ebddf062c.jpg",
+            image: "https://cdn.phototourl.com/free/2026-05-26-b54dc4f7-75ca-4ef2-9d92-4393c45e7ffb.jpg",
             description: "ລາຄາ Stardewvalley\n-ເມວຮ້ານ=10.000₭\n-ໃສ່ເມວ=150.000₭\n!ລາຍລະອຽດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນຫລາຍຄົນບໍມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ:ແມ່ນການຊື້ໂຕເກມນັ້ນໃສ່ ເມວ/ໄອດີລູກຄ້າ"
         },
         {
@@ -484,7 +515,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "Gta san",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ Gta san",
-            image: "https://cdn.phototourl.com/free/2026-04-26-03d230e1-1530-48b3-b6a2-e32922b2c039.jpg",
+            image: "https://cdn.phototourl.com/free/2026-05-26-94511f1c-d2f5-440b-98d1-35e93356abf5.jpg",
             description: "ລາຄາ Gta san\n-ເມວຮ້ານ=10.000₭\n-ກົດໃສ່ເມວ=150.000₭\n!ລາຍລະອຽດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນຫລາຍຄົນບໍມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ:ແມ່ນການຊື້ໂຕເກມນັ້ນໃສ່ ເມວ/ໄອດີລູກຄ້າ"
         },
 
@@ -504,7 +535,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "Netflix",
              message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ Netflix",
-            image: "https://cdn.phototourl.com/free/2026-04-26-1c578fed-ff95-4041-9588-c1804ebd0509.jpg",
+            image: "https://cdn.phototourl.com/free/2026-05-26-a2142c1b-1e41-4a95-ba94-0b47a4c0c9cd.jpg",
             description: "ໃຊ້ໄດ້: ມືຖື / iPad / ຄອມ\n• 7 ວັນ 25.000kip (ປິດເຄມ 30.000kip)\n• 30 ວັນ 75.000kip (ປິດເຄມ 80.000kip)"
         },
         {
@@ -513,7 +544,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "IQIYI",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ IQIYI",
-            image: "https://cdn.phototourl.com/free/2026-04-26-599b6668-1dd5-4cc3-8e07-7bc2247b58ca.jpg",
+            image: "https://cdn.phototourl.com/free/2026-05-26-0c621a50-de00-43e6-80d8-0312c033a65d.jpg",
             description: "ຈໍບໍ່ຊົນ ເບິ່ງພ້ອມກັນໄດ້ 4 ອຸປະກອນ\n• 30 ວັນ 30.000kip (ຫານ 4)\n• 30 ວັນ 85.000kip (ຍົກແອັກ)"
         },
          {
@@ -522,7 +553,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "WeTV VIP Standard",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ WeTV VIP Standard",
-            image: "https://cdn.phototourl.com/free/2026-04-26-a2a69485-80c0-4fbd-8d9b-8dc85ec4d763.jpg",
+            image: "https://cdn.phototourl.com/free/2026-05-26-923662de-8ec5-4ec2-a1a4-58ca78174c53.jpg",
             description: "• 30 ວັນ 17.000 (ຫານ 4)\n• 30 ວັນ 30.000kip (ຫານ 3)\n• 30 ວັນ 43.000kip (ຫານ 2)\n• 30 ວັນ 70.000kip (ຍົກແອັກ)"
         },
         {
@@ -531,7 +562,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "YOUKU VIP",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ YOUKU VIP",
-            image: "https://cdn.phototourl.com/free/2026-05-16-92f67fa9-e4bc-4889-8a8b-707f78b6da37.jpg",
+            image: "https://cdn.phototourl.com/free/2026-05-26-964d5807-0eae-43cd-823f-876faab1b3bc.jpg",
             description: "♡ 7ມື້  15.000kip\n♡ 30 ມື້ 25.000kip ຫານ4\n♡ 30 ມື້ 55.000kip ຫານ2 "
         },
          {
@@ -540,7 +571,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "youtuִbe pre݁miumִ 30 วัน",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ youtuִbe pre݁miumִ 30 วัน",
-            image: "https://cdn.phototourl.com/free/2026-05-16-e814865f-7d5f-4f92-932b-8dc9c1a8a5fc.jpg",
+            image: "https://cdn.phototourl.com/free/2026-05-26-e571deac-798c-4979-84ea-0c07239eb9de.jpg",
             description: "30 ມື້\n♡ ເມວລູກຄ້າຕໍ່ເມວ 75.000kip\n♡ ເມວຮ້ານບໍ່ຕໍ່ເມວແພັກລາຍບຸກຄົນ 40.000kip ເຄຮມ"
         },
          {
@@ -549,7 +580,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "Dramabox",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ Dramabox",
-            image: "https://cdn.phototourl.com/free/2026-05-16-2a829888-32b8-4bf1-8255-d0d3da31d9d9.jpg",
+            image: "https://cdn.phototourl.com/member/2026-05-26-67edf73b-49d9-4aeb-adea-9eef11ef4877.jpg",
             description: "♡ 1ມື້  55.000kip\n♡ 3 ມື້ 80.000kip \n♡ 7 ມື້ 120.000kip  "
         },
         {
@@ -558,7 +589,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "BILIBILI",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ BILIBILI",
-            image: "https://cdn.phototourl.com/free/2026-05-16-8be07eb6-d977-4695-aec2-a93a3e68951b.jpg",
+            image: "https://cdn.phototourl.com/member/2026-05-26-fddf3028-0cb7-4114-b54c-75da261b0556.jpg",
             description: "♡ 7ມື້  15.000kip\n♡ 30 ມື້ 25.000kip ຫານ4\n♡ 30 ມື້ 55.000kip ຫານ2 "
         },
          {
@@ -567,7 +598,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "VIU PREMIUM",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ VIU PREMIUM",
-            image: "https://cdn.phototourl.com/free/2026-05-16-91fadc8b-649d-455e-9bcf-806e1e1588f0.jpg",
+            image: "https://cdn.phototourl.com/member/2026-05-26-67edf73b-49d9-4aeb-adea-9eef11ef4877.jpg",
             description: "♡ 7ມື້  12.000kip\n♡ 30 ມື້ 22.000kip ຫານ4\n♡ 30 ມື້ 40.000kip ຫານ2\n♡ 90 ມື້ 50.000kip ຫານ4\n♡ 30 ມື້ 90.000kip  ຍົກແອັດ"
         },
          
@@ -577,7 +608,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "ເຕິມ Free Fire",
             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈເຕິມ Free Fire",
-            image: "https://cdn.phototourl.com/free/2026-04-26-201d8ded-7a2b-4902-ac72-df7f51600b6d.jpg",
+            image: "https://cdn.phototourl.com/member/2026-05-26-a811ea68-6024-4269-b672-e44a201fad4b.jpg",
             description: "ເຊັກລາຄາຕາມຮູບເລີຍເດີ"
         },
         {
@@ -586,7 +617,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "ເຕິມ ROV",
              message:"ສະບາຍດີ ຂ້ອຍສົນໃຈເຕິມ ROV",
-            image: "https://cdn.phototourl.com/free/2026-04-26-d7479d6e-a1f4-4d58-bc24-00ac101c6a22.jpg",
+            image: "https://cdn.phototourl.com/member/2026-05-26-9449271d-45aa-4362-9b77-da94a1f15606.jpg",
             description: "• 11 = 10.000kip\n• 24 = 20.000kip\n• 60 = 45.000kip\n• 110 = 70.000kip\n• 185 = 111.000kip\n• 370 = 210.000kip\n• 620 = 345.000kip\n• 1240 = 669.000kip"
         },
         {
@@ -595,7 +626,7 @@ function goHome() {
             name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
             price: "ເຕິມ Roblox",
              message:"ສະບາຍດີ ຂ້ອຍສົນໃຈເຕິມ Roblox",
-            image: "https://cdn.phototourl.com/free/2026-04-26-9401cd71-3bad-42cd-82d9-fe60defc20f6.jpg",
+            image: "https://cdn.phototourl.com/member/2026-05-26-2fe99bb9-7753-4dfd-9d8c-0b26f6f2e167.jpg",
             description: "• 80R = 27.000kip\n• 160R = 60.000kip\n• 240R = 69.000kip\n• 320R = 97.000kip\n• 400R = 112.000kip\n• 500R = 120.000kip\n• 1000R = 220.000kip"
         },
         {
@@ -623,7 +654,9 @@ products.forEach(product => {
     card.onclick = () => openModal(product);
 
     card.innerHTML = `
-        <img src="${product.image}" class="product-image">
+        <div class="product-image-wrapper">
+    <img src="${product.image}" class="product-image">
+</div>
         <div class="product-info">
             <div class="product-name">${product.name}</div>
             <div class="product-price">${product.price}</div>
@@ -655,7 +688,7 @@ products.forEach(product => {
             const whatsappBtn =
         document.querySelector('.whatsapp');
             whatsappBtn.href =
-        "https://wa.me/8562099340962?text="+
+        "https://wa.me/66649069984?text="+
         encodeURIComponent(product.message);
         
         
