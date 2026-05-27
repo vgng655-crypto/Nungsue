@@ -460,7 +460,7 @@ function openModal(p) {
         const isHeader = !line.startsWith("-") && !line.startsWith("!");
 
         if (isNote)   div.classList.add("is-note");
-        if (isHeader && lines.indexOf(line) > 0) div.classList.add("is-header");
+       if (isHeader) div.classList.add("is-header");
 
         const dot = document.createElement("span");
         dot.className = "desc-dot";
