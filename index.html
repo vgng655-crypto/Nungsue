@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="lo">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รายการสินค้าของฉัน</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>ຮ້ານຂາຍສິນຄ້າ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-    
-}
         * {
             box-sizing: border-box;
             font-family: 'Noto Sans Lao', 'Segoe UI', sans-serif;
@@ -21,694 +18,501 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            min-height: 100vh;
         }
 
-        header {
-            background-image: url();
-            color: #11437c;
-            padding: 2rem;
+        .main-header {
             text-align: center;
+            padding: 25px 15px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+            color: white;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
+        .main-header h1 { font-size: 26px; margin-bottom: 8px; }
+        .main-header p  { font-size: 16px; opacity: 0.9; }
 
         .container {
             max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            margin: 0 auto;
+            padding: 0 1rem 2rem;
         }
 
-        /* ระบบ Grid */
+        .category-menu {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        .category-menu button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .category-menu button:hover { transform: scale(1.05); }
+
+        .zone-label {
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin: 20px 0 10px;
+            font-size: 20px;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        .game-title  { background: linear-gradient(135deg, #ff416c, #ff4b2b); color: white; }
+        .app-title   { background: linear-gradient(135deg, #36d1dc, #5b86e5); color: white; }
+        .topup-title { background: linear-gradient(135deg, #f7971e, #ffd200); color: white; }
+
         .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 220px));
-    gap: 10px;
-    justify-content: start;
-}
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 220px));
+            gap: 10px;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        #gameZone  { border: 2px solid #ff416c; background: rgba(255,255,255,0.85); }
+        #appZone   { border: 2px solid #36d1dc; background: rgba(255,255,255,0.85); }
+        #topupZone { border: 2px solid #f7971e; background: rgba(255,255,255,0.85); }
 
         .product-card {
-    background: #f7f3f3;
-    border-radius: 8px;
-    overflow: visible;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 6px
-    
-}
-
-.product-image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 180px;
-    
-    border-radius: 20px;
-    padding: 3px;
-    background: conic-gradient(from var(--angle, 0deg), #ff6ec7, #ffcc44, #43e97b, #38f9d7, #667eea, #ff6ec7);
-    animation: spinBorder 3s linear infinite;
-    box-shadow: none;
-    overflow: hidden;
-    margin-bottom: 6px;
-}
-
-
-@property --angle {
-    syntax: '<angle>';
-    initial-value: 0deg;
-    inherits: false;
-}
-
-@keyframes spinBorder {
-    to { --angle: 360deg; }
-}
-
-.product-image {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-    border-radius:17px;
-}
-
+            background: #f7f3f3;
+            border-radius: 8px;
+            overflow: visible;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 6px;
+        }
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-       
-
-        .product-info {
-            padding: 10px;
-            text-align: center;
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
         }
+        @keyframes spinBorder { to { --angle: 360deg; } }
 
-        .product-name {
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 170px;
+            border-radius: 20px;
+            padding: 3px;
+            background: conic-gradient(from var(--angle, 0deg), #ff6ec7, #ffcc44, #43e97b, #38f9d7, #667eea, #ff6ec7);
+            animation: spinBorder 3s linear infinite;
+            overflow: hidden;
+            margin-bottom: 6px;
         }
-
-        .product-price {
-            color: #0077ff;
-            font-weight: bold;
-        }
-
-        /* --- สไตล์ของ Modal (ป๊อปอัพ) --- */
-        .modal {
-            display: none; /* ซ่อนไว้เริ่มต้น */
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
+        .product-image {
             width: 100%;
             height: 100%;
-            background-color: rgba(8, 8, 8, 0.7);
+            object-fit: cover;
+            display: block;
+            border-radius: 17px;
+        }
+
+        .product-info { padding: 6px 8px 8px; text-align: center; }
+        .product-name { font-size: 12px; color: #555; margin-bottom: 4px; }
+        .product-price { color: #0077ff; font-weight: bold; font-size: 14px; }
+
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.75);
+            backdrop-filter: blur(5px);
             overflow-y: auto;
             padding: 20px;
-            align-items: first baseline;
+            align-items: flex-start;
             justify-content: center;
-            padding: 20px;
+        }
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 520px;
+            margin: auto;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            animation: popIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+            position: relative;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
         }
 
-       .modal-content {
-    background: linear-gradient(135deg, #a4e9a4, #92b1da);
-    padding: 2rem;
-    border-radius: 16px;
-    width: 90%;
-    max-width: 600px;
-    position: relative;
-    text-align: center;
-
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    border: 2px solid rgba(0,0,0,0.05);
-
-    animation: pop 0.25s ease;
-}
-@keyframes pop {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-.modal {
-    background-color: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(5px);
-}
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        /* ส่วนหัวสีของ Modal */
+        .modal-header {
+            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+            padding: 0;
+            position: relative;
         }
-
-        .close-btn {
-            position: sticky;
-            top: 0;
-            float: right;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #000;
-            background: wheat;
-            border-radius: 50%;
-            padding: 0 12px;
-            z-index: 9999;
-        }
+        .modal-header.game  { background: linear-gradient(135deg, #ff416c, #ff4b2b); }
+        .modal-header.app   { background: linear-gradient(135deg, #36d1dc, #5b86e5); }
+        .modal-header.topup { background: linear-gradient(135deg, #f7971e, #ffd200); }
 
         .modal-img {
             width: 100%;
-            max-width: 350px;
-            aspect-ratio: 1/1;
+            height: 220px;
             object-fit: cover;
-            
-            border-radius: 18px;
             display: block;
-            margin: 0 auto 1rem;
         }
 
-        .modal-desc {
-            margin: 1rem 0;
-            color: #0c0c0c;
-            text-align: left;
+        /* ปุ่มปิด */
+        .close-btn {
+            position: absolute;
+            top: 10px; right: 12px;
+            width: 36px; height: 36px;
+            background: rgba(0,0,0,0.45);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10;
+            transition: background 0.2s;
+        }
+        .close-btn:hover { background: rgba(0,0,0,0.7); }
+
+        /* ส่วนเนื้อหา */
+        .modal-body {
+            padding: 20px 22px 24px;
         }
 
-        /* ส่วนติดต่อเรา */
-        footer {
-            background-image: url();
-            background-size: cover;
+        .modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 4px;
+        }
+
+        .modal-price-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        /* ===== กล่องรายละเอียด (ปรับปรุงหลัก) ===== */
+        .modal-desc-box {
+            background: #f5f7ff;
+            border: 1.5px solid #dde3f5;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 18px;
+        }
+
+        .modal-desc-box .desc-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #5b86e5;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* แต่ละบรรทัดรายละเอียด */
+        .desc-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 7px 0;
+            border-bottom: 1px solid #e8ecf8;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+        }
+        .desc-line:last-child { border-bottom: none; padding-bottom: 0; }
+        .desc-line:first-child { padding-top: 0; }
+
+        /* ไอคอนจุด */
+        .desc-dot {
+            width: 7px; height: 7px;
+            background: #5b86e5;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+
+        /* หัวข้อ (บรรทัดที่ขึ้นต้นด้วย !) */
+        .desc-line.is-note .desc-dot { background: #ff6b6b; }
+        .desc-line.is-note { color: #c0392b; }
+        .desc-line.is-header {
+            font-weight: 700;
+            color: #222;
+            font-size: 15px;
+        }
+        .desc-line.is-header .desc-dot { background: #f7971e; width: 9px; height: 9px; margin-top: 6px; }
+
+        /* ปุ่มสั่งซื้อ */
+        .btn-order {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            color: white;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            box-shadow: 0 4px 15px rgba(37,211,102,0.35);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .btn-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37,211,102,0.45);
+        }
+        .btn-order svg { flex-shrink: 0; }
+
+        /* Footer */
+        .main-footer {
             text-align: center;
-            margin-top: 3rem;
-            
+            margin-top: 40px;
+            padding: 25px 15px;
+            background: linear-gradient(135deg, #4f3eee, #2b50b4);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -8px 20px rgba(0,0,0,0.2);
         }
+        .main-footer h2 { font-size: 20px; margin-bottom: 16px; }
 
         .contact-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
-            margin-top: 1rem;
+            margin-top: 10px;
         }
-
         .btn {
             padding: 12px 25px;
             border-radius: 50px;
             text-decoration: none;
-            color: #111010;
+            color: white;
             font-weight: bold;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
         .facebook { background-color: #1877F2; }
         .whatsapp { background-color: #25D366; }
-        .product-image {
-    width: 100% !important;
-    height: 200px !important;
-    object-fit: cover !important;
-    display: block !important;
-}
 
-.product-card {
-    padding: 6px !important;
-}.zone-title {
-    padding: 10px 15px;
-    border-radius: 10px;
-    margin: 20px 0 10px;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-}
-
-/* 🎮 เกม */
-h2:contains("🎮") {
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
-}
-
-/* 📱 แอป */
-h2:contains("📱") {
-    background: linear-gradient(135deg, #36d1dc, #5b86e5);
-}
-
-/* 💎 เติมเกม */
-h2:contains("💎") {
-    background: linear-gradient(135deg, #f7971e, #ffd200);
-    color: black;
-}
-
-/* โซนกรอบ */
-.product-grid {
-    border-radius: 15px;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-/* แต่ละโซนดูนูนขึ้น */
-#gameZone {
-    border: 2px solid #ff416c;
-    background: rgb(250, 248, 248);
-}
-
-#appZone {
-    border: 2px solid #36d1dc;
-    background: rgb(255, 255, 255);
-}
-
-#topupZone {
-    border: 2px solid #f7971e;
-    background: rgb(240, 239, 237);
-}
-.game-title,
-.app-title,
-.topup-title {
-    padding: 12px 18px;
-    border-radius: 12px;
-    margin: 20px 0 10px;
-    font-size: 20px;
-    font-weight: bold;
-    display: inline-block;
-    box-shadow: 0 6px 15px rgba(250, 249, 249, 0.986);
-    border: 2px solid rgba(255,255,255,0.3);
-}
-
-.game-title {
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    color: white;
-}
-
-
-.app-title {
-    background: linear-gradient(135deg, #36d1dc, #5b86e5);
-    color: white;
-}
-
-
-.topup-title {
-    background: linear-gradient(135deg, #f7971e, #ffd200);
-    color: rgb(250, 247, 247);
-}
-.main-header {
-    text-align: center;
-    padding: 25px 15px;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #36d1dc, #5b86e5);
-    color: white;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.main-header h1 {
-    font-size: 26px;
-    margin-bottom: 8px;
-}
-
-.main-header p {
-    font-size: 16px;
-    opacity: 0.9;
-}
-.main-footer {
-    text-align: center;
-    margin-top: 40px;
-    padding: 25px 15px;
-    background: linear-gradient(135deg, #4f3eee, #2b50b4);
-    color: white;
-    border-radius: 20px 20px 0 0;
-    box-shadow: 0 -8px 20px rgba(0,0,0,0.2);
-}
-
-.main-footer h2 {
-    font-size: 20px;
-}
-.category-menu {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 15px 0;
-}
-
-.category-menu button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(135deg, #36d1dc, #5b86e5);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.category-menu button:hover {
-    transform: scale(1.05);
-    transition: 0.2s;
-}
-@media (max-width: 480px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-  .product-image { height: 140px; }
-  .category-menu button {
-    font-size: 0.8rem;
-    padding: 8px 12px;
-  }
-}
-
-
-
-</style>
-
+        @media (max-width: 480px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .product-image-wrapper { height: 130px; }
+            .category-menu button { font-size: 0.78rem; padding: 8px 10px; }
+            .modal-img { height: 180px; }
+            .modal-title { font-size: 18px; }
+        }
+    </style>
 </head>
 <body>
 
 <header class="main-header">
     <h1>🛍️ ຫນ້າລວມສິນຄ້າ</h1>
     <p>👇 ກົດຄິກເພື່ອເບິ່ງສິນຄ້າ</p>
-</header>><div class="category-menu">
-    <button onclick="goHome()" style="background:red;">
-⬅️ ກັບຄືນຫາສີນຄ້າທັ້ງຫມົດ
-</button>
+</header>
 
+<div class="container">
+    <div class="category-menu">
+        <button onclick="goHome()" style="background:linear-gradient(135deg,#e74c3c,#c0392b);">⬅️ ທັງຫມົດ</button>
+        <button onclick="showZone('game')">🎮 ເກມພີມ່ຽມ</button>
+        <button onclick="showZone('app')">📱 ແອັບພີມ່ຽມ</button>
+        <button onclick="showZone('topup')">💎 ເຕິມເກມ</button>
+    </div>
 
-    <button onclick="showZone('game')">🎮 (Game) ເກມພີມ່ຽມ ສຸດຄຸ້ມ</button>
-    <button onclick="showZone('app')">📱 (App) ແອັບພີມ່ຽມ ສຸດຄຸ້ມ</button>
-    <button onclick="showZone('topup')">💎 ເຕິມເກມ ສຸດຄຸ້ມ</button>
+    <h2 class="zone-label game-title">🎮 (Game) ເກມພີມ່ຽມ ສຸດຄຸ້ມ</h2>
+    <div class="product-grid" id="gameZone"></div>
 
+    <h2 class="zone-label app-title">📱 (App) ແອັບພີມ່ຽມ ສຸດຄຸ້ມ</h2>
+    <div class="product-grid" id="appZone"></div>
+
+    <h2 class="zone-label topup-title">💎 ເຕິມເກມ ສຸດຄຸ້ມ</h2>
+    <div class="product-grid" id="topupZone"></div>
 </div>
 
-<h2 class="game-title">🎮 (Game) ເກມພີມ່ຽມ ສຸດຄຸ້ມ</h2>
-<div class="product-grid" id="gameZone"></div>
-
-<h2 class="app-title">🎮 (App) ແອັບພີມ່ຽມ ສຸດຄຸ້ມ</h2>
-<div class="product-grid" id="appZone"></div>
-
-<h2 class="topup-title">🎮 ເຕິມເກມ ສຸດຄຸ້ມ</h2>
-<div class="product-grid" id="topupZone"></div>
-
-
-<div id="productModal" class="modal">
+<!-- MODAL -->
+<div id="productModal" class="modal" onclick="handleModalClick(event)">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <img id="modalImg" class="modal-img" src="" alt="">
-        <h2 id="modalTitle"></h2>
-        <p id="modalPrice" class="product-price"></p>
-        <div id="modalDesc" class="modal-desc"></div>
-        <hr style="margin: 1.5rem 0; border: 0.5px solid #eee;">
-        <p>ສົນໃຈຊື້ສິນຄ້ານີ້?</p>
-        <div class="contact-buttons">
-            <a href="https://wa.me/66649069984" class="btn whatsapp">ສັ່ງຊື້ທາງ WhatsApp</a>
+        <div class="modal-header" id="modalHeader">
+            <img id="modalImg" class="modal-img" src="" alt="">
+            <button class="close-btn" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-title" id="modalTitle"></div>
+            <div class="modal-price-tag" id="modalPriceTag"></div>
+            <div class="modal-desc-box">
+                <div class="desc-title">📋 ລາຍລະອຽດ / ລາຄາ</div>
+                <div id="modalDesc"></div>
+            </div>
+            <a id="modalWhatsApp" href="#" target="_blank" class="btn-order">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                ສັ່ງຊື້ທາງ WhatsApp
+            </a>
         </div>
     </div>
 </div>
 
 <footer class="main-footer">
     <h2>📞 ຕິດຕໍ່ສອບຖາມ / ສັ່ງຊື້</h2>
-</footer>
-        <div class="contact-buttons">
-            <a href="https://www.facebook.com/share/1GYzCxUQNF/" target="_blank" class="btn facebook">Facebook </a>
-            
-        </div>
-        <div class="contact-buttons">
-            <a href="https://wa.me/66649069984" class="btn whatsapp">WhatsApp</a>
-        </div>
+    <div class="contact-buttons">
+        <a href="https://www.facebook.com/share/1GYzCxUQNF/" target="_blank" class="btn facebook">
+            📘 Facebook
+        </a>
+        <a href="https://wa.me/66649069984" class="btn whatsapp">
+            💬 WhatsApp
+        </a>
     </div>
 </footer>
 
 <script>
-    function showZone(type) {
-
-    const game = document.getElementById("gameZone");
-    const app = document.getElementById("appZone");
-    const topup = document.getElementById("topupZone");
-
-    const gameTitle = document.querySelector(".game-title");
-    const appTitle = document.querySelector(".app-title");
-    const topupTitle = document.querySelector(".topup-title");
-
-    // ซ่อนทั้งหมดก่อน
-    game.style.display = "none";
-    app.style.display = "none";
-    topup.style.display = "none";
-
-    gameTitle.style.display = "none";
-    appTitle.style.display = "none";
-    topupTitle.style.display = "none";
-
-    // แสดงเฉพาะที่เลือก
-    if (type === "game") {
-        game.style.display = "grid";
-        gameTitle.style.display = "block";
-    }
-
-    if (type === "app") {
-        app.style.display = "grid";
-        appTitle.style.display = "block";
-    }
-
-    if (type === "topup") {
-        topup.style.display = "grid";
-        topupTitle.style.display = "block";
-    }
-}
-function goHome() {
-    document.getElementById("gameZone").style.display = "grid";
-    document.getElementById("appZone").style.display = "grid";
-    document.getElementById("topupZone").style.display = "grid";
-
-    document.querySelector(".game-title").style.display = "block";
-    document.querySelector(".app-title").style.display = "block";
-    document.querySelector(".topup-title").style.display = "block";
-}
-    // 1. ข้อมูลสินค้า (คุณสามารถเพิ่ม/แก้ไข ตรงนี้ได้เลย)
-    const products = [
-        {
-            id: 1,
-            category:"game",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "Minecraf",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ minecraft",
-            image: "https://cdn.phototourl.com/free/2026-05-26-9a7c1685-1022-48c8-8e6c-ebd14c8f5a8f.jpg",
-            description: "ລາຄາ Minecraft\n -ເມວຮ້ານ=10.000₭\n -ກົດຊື້ໃສ່ເມວລູກຄ້າ=99.000₭\n!ລາຍລະອຽດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນຫລາຍຄົນບໍມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ:ແມ່ນການຊື້ໂຕເກມນັ້ນໃສ່ ເມວ/ໄອດີລູກຄ້າ  "
-        },
-        {
-            id: 2,
-            category:"game",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "Terraria ",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ terraria",
-            image: "https://cdn.phototourl.com/free/2026-05-26-ed670a94-16a3-48b7-8e0b-06a636f256fd.jpg",
-            description: "ລາຄາ Terraria\n-ເມວຮ້ານ=10.000₭\n-ກົດໃສ່ຊື້ໃສ່ລູກຄ້າເມວ=150.000₭\n!ລາຍລະອຽດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນຫລາຍຄົນບໍມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ:ແມ່ນການຊື້ໂຕເກມນັ້ນໃສ່ ເມວ/ໄອດີລູກຄ້າ "
-        },
-         {
-            id: 3,
-            category:"game",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "Stardew valley",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ stardew valley",
-            image: "https://cdn.phototourl.com/free/2026-05-26-b54dc4f7-75ca-4ef2-9d92-4393c45e7ffb.jpg",
-            description: "ລາຄາ Stardewvalley\n-ເມວຮ້ານ=10.000₭\n-ໃສ່ເມວ=150.000₭\n!ລາຍລະອຽດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນຫລາຍຄົນບໍມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ:ແມ່ນການຊື້ໂຕເກມນັ້ນໃສ່ ເມວ/ໄອດີລູກຄ້າ"
-        },
-        {
-            id: 4,
-            category:"game",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "Gta san",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ Gta san",
-            image: "https://cdn.phototourl.com/free/2026-05-26-94511f1c-d2f5-440b-98d1-35e93356abf5.jpg",
-            description: "ລາຄາ Gta san\n-ເມວຮ້ານ=10.000₭\n-ກົດໃສ່ເມວ=150.000₭\n!ລາຍລະອຽດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນຫລາຍຄົນບໍມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ:ແມ່ນການຊື້ໂຕເກມນັ້ນໃສ່ ເມວ/ໄອດີລູກຄ້າ"
-        },
-
-
-        {
-            id: 5,
-            category:"app",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "ສ້າງGmail/icloud",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ ສ້າງgmail/icloud",
-            image: "https://cdn.phototourl.com/free/2026-04-26-02ae7437-c201-4921-b857-9a2b00d57045.jpg",
-            description: " ບໍລິການ Google & Apple ID ຄົບວົງຈອນ📌\n •ຮັບສ້າງບັນຊີໃໝ່• Gmail (Android): 💰 15,000 Kip\n• Apple ID (iOS): 💰 35,000 Kip\n•ຮັບຍ້າຍພາກພື້ນ/ປະເທດ• ຍ້າຍ Gmail (ລາວ ➝ ໄທ/ປະເທດອື່ນ): 💰 25,000 Kip\n• ຍ້າຍ Apple ID (ລາວ ➝ ໄທ/ປະເທດອື່ນ): 💰 15,000 Kip"
-        },
-        {
-            id: 6,
-            category:"app",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "Netflix",
-             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ Netflix",
-            image: "https://cdn.phototourl.com/free/2026-05-26-a2142c1b-1e41-4a95-ba94-0b47a4c0c9cd.jpg",
-            description: "ໃຊ້ໄດ້: ມືຖື / iPad / ຄອມ\n• 7 ວັນ 25.000kip (ປິດເຄມ 30.000kip)\n• 30 ວັນ 75.000kip (ປິດເຄມ 80.000kip)"
-        },
-        {
-            id: 7,
-            category:"app",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "IQIYI",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ IQIYI",
-            image: "https://cdn.phototourl.com/free/2026-05-26-0c621a50-de00-43e6-80d8-0312c033a65d.jpg",
-            description: "ຈໍບໍ່ຊົນ ເບິ່ງພ້ອມກັນໄດ້ 4 ອຸປະກອນ\n• 30 ວັນ 30.000kip (ຫານ 4)\n• 30 ວັນ 85.000kip (ຍົກແອັກ)"
-        },
-         {
-            id: 8,
-            category:"app",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "WeTV VIP Standard",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ WeTV VIP Standard",
-            image: "https://cdn.phototourl.com/free/2026-05-26-923662de-8ec5-4ec2-a1a4-58ca78174c53.jpg",
-            description: "• 30 ວັນ 17.000 (ຫານ 4)\n• 30 ວັນ 30.000kip (ຫານ 3)\n• 30 ວັນ 43.000kip (ຫານ 2)\n• 30 ວັນ 70.000kip (ຍົກແອັກ)"
-        },
-        {
-            id: 8.1,
-            category:"app",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "YOUKU VIP",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ YOUKU VIP",
-            image: "https://cdn.phototourl.com/free/2026-05-26-964d5807-0eae-43cd-823f-876faab1b3bc.jpg",
-            description: "♡ 7ມື້  15.000kip\n♡ 30 ມື້ 25.000kip ຫານ4\n♡ 30 ມື້ 55.000kip ຫານ2 "
-        },
-         {
-            id: 8.2,
-            category:"app",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "youtuִbe pre݁miumִ 30 วัน",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ youtuִbe pre݁miumִ 30 วัน",
-            image: "https://cdn.phototourl.com/free/2026-05-26-e571deac-798c-4979-84ea-0c07239eb9de.jpg",
-            description: "30 ມື້\n♡ ເມວລູກຄ້າຕໍ່ເມວ 75.000kip\n♡ ເມວຮ້ານບໍ່ຕໍ່ເມວແພັກລາຍບຸກຄົນ 40.000kip ເຄຮມ"
-        },
-         {
-            id: 8.3,
-            category:"app",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "Dramabox",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ Dramabox",
-            image: "https://cdn.phototourl.com/member/2026-05-26-67edf73b-49d9-4aeb-adea-9eef11ef4877.jpg",
-            description: "♡ 1ມື້  55.000kip\n♡ 3 ມື້ 80.000kip \n♡ 7 ມື້ 120.000kip  "
-        },
-        {
-            id: 8.4,
-            category:"app",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "BILIBILI",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ BILIBILI",
-            image: "https://cdn.phototourl.com/member/2026-05-26-fddf3028-0cb7-4114-b54c-75da261b0556.jpg",
-            description: "♡ 7ມື້  15.000kip\n♡ 30 ມື້ 25.000kip ຫານ4\n♡ 30 ມື້ 55.000kip ຫານ2 "
-        },
-         {
-            id: 8.5,
-            category:"app",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "VIU PREMIUM",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ VIU PREMIUM",
-            image: "https://cdn.phototourl.com/member/2026-05-26-67edf73b-49d9-4aeb-adea-9eef11ef4877.jpg",
-            description: "♡ 7ມື້  12.000kip\n♡ 30 ມື້ 22.000kip ຫານ4\n♡ 30 ມື້ 40.000kip ຫານ2\n♡ 90 ມື້ 50.000kip ຫານ4\n♡ 30 ມື້ 90.000kip  ຍົກແອັດ"
-        },
-         
-        {
-            id: 10,
-            category:"topup",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "ເຕິມ Free Fire",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈເຕິມ Free Fire",
-            image: "https://cdn.phototourl.com/member/2026-05-26-a811ea68-6024-4269-b672-e44a201fad4b.jpg",
-            description: "ເຊັກລາຄາຕາມຮູບເລີຍເດີ"
-        },
-        {
-            id: 11,
-            category:"topup",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "ເຕິມ ROV",
-             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈເຕິມ ROV",
-            image: "https://cdn.phototourl.com/member/2026-05-26-9449271d-45aa-4362-9b77-da94a1f15606.jpg",
-            description: "• 11 = 10.000kip\n• 24 = 20.000kip\n• 60 = 45.000kip\n• 110 = 70.000kip\n• 185 = 111.000kip\n• 370 = 210.000kip\n• 620 = 345.000kip\n• 1240 = 669.000kip"
-        },
-        {
-            id: 12,
-            category:"topup",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "ເຕິມ Roblox",
-             message:"ສະບາຍດີ ຂ້ອຍສົນໃຈເຕິມ Roblox",
-            image: "https://cdn.phototourl.com/member/2026-05-26-2fe99bb9-7753-4dfd-9d8c-0b26f6f2e167.jpg",
-            description: "• 80R = 27.000kip\n• 160R = 60.000kip\n• 240R = 69.000kip\n• 320R = 97.000kip\n• 400R = 112.000kip\n• 500R = 120.000kip\n• 1000R = 220.000kip"
-        },
-        {
-            id: 13,
-            category:"topup",
-            name: "ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ",
-            price: "ເຕິມຫລຽນ Minecraf",
-            message:"ສະບາຍດີ ຂ້ອຍສົນໃຈເຕິມຫລຽນ minecraf ",
-            image: "https://cdn.phototourl.com/member/2026-04-26-7086a017-d2d4-4992-a07b-5d14ea584b38.jpg",
-            description: "• 320 MC = 55.000kip\n• 1020 MC = 130.000kip\n• 1720 MC = 179.000kip\n• 3500 MC = 299.000kip\n• 8800 MC = 666.000kip\n• 17.600 MC = 1.339.000kip"
-        },
-    ];
-
-   
-
-    // 2. ฟังก์ชันแสดงสินค้าในหน้าเว็บ
-    const gameZone = document.getElementById("gameZone");
-const appZone = document.getElementById("appZone");
+const products = [
+    { id:1,  category:"game",  name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"Minecraft",      message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ Minecraft",       image:"https://cdn.phototourl.com/free/2026-05-26-9a7c1685-1022-48c8-8e6c-ebd14c8f5a8f.jpg", description:"\nລາຄາ Minecraft\n-ເມວຮ້ານຮັບປະກັນເຂົ້າເມວບໍໄດ້35ວັນ=10.000₭\n-ກົດຊື້ໃສ່ເມວ/ໄອຄາວລູກຄ້າ=99.000₭\n!ໝາຍເຫດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນ ບໍ່ມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ = ຊື້ໂຕເກມໃສ່ ເມວ/ໄອຄາວລູກຄ້າ" },
+    { id:2,  category:"game",  name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"Terraria",       message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ Terraria",        image:"https://cdn.phototourl.com/free/2026-05-26-ed670a94-16a3-48b7-8e0b-06a636f256fd.jpg", description:"ລາຄາ Terraria\n-ເມວຮ້ານຮັບປະກັນເຂົ້າເມວບໍໄດ້35ວັນ=15.000₭\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ=150.000₭\n-IOSກົດຊື້ໃສ່ເມວລູກຄ້າ=180.000₭\n!ໝາຍເຫດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນ ບໍ່ມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ = ຊື້ໂຕເກມໃສ່ ເມວ/ໄອດີ ລູກຄ້າ" },
+    { id:3,  category:"game",  name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"Stardew Valley",  message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ Stardew Valley",   image:"https://cdn.phototourl.com/free/2026-05-26-b54dc4f7-75ca-4ef2-9d92-4393c45e7ffb.jpg", description:"ລາຄາ Stardew Valley\n-ເມວຮ້ານຮັບປະກັນເຂົ້າເມວບໍໄດ້35ວັນ=15.000₭\n-Android ກົດຊື້ໃສ່ເມວລູກຄ້າ=150.000₭\n-IOSກົດຊື້ໃສ່ເມວລູກຄ້າ=180.000₭\n!ໝາຍເຫດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນ ບໍ່ມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ = ຊື້ໂຕເກມໃສ່ ເມວ/ໄອດີ ລູກຄ້າ" },
+    { id:4,  category:"game",  name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"GTA San Andreas", message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ GTA San Andreas",  image:"https://cdn.phototourl.com/free/2026-05-26-94511f1c-d2f5-440b-98d1-35e93356abf5.jpg", description:"ລາຄາ GTA San Andreas\n-ເມວຮ້ານຮັບປະກັນເຂົ້າເມວບໍໄດ້35ວັນ=15.000₭\n-Androidກົດຊື້ໃສ່ເມວລູກຄ້າ=150.000₭\n-IOSກົດຊື້ໃສ່ເມວລູກຄ້າ=220.000₭\n!ໝາຍເຫດ:\n-ເມວຮ້ານເປັນເມວໃຊ້ຮ່ວມກັນ ບໍ່ມີຜົນຕໍ່ການໃຊ້ງານ\n-ກົດຊື້ໃສ່ເມວລູກຄ້າ = ຊື້ໂຕເກມໃສ່ ເມວ/ໄອດີ ລູກຄ້າ" },
+    { id:5,  category:"app",   name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"ສ້າງ Gmail / iCloud", message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ ສ້າງ Gmail/iCloud", image:"https://cdn.phototourl.com/free/2026-04-26-02ae7437-c201-4921-b857-9a2b00d57045.jpg", description:"ບໍລິການ Google & Apple ID ຄົບວົງຈອນ\n-ສ້າງ Gmail (Android) = 15.000₭\n-ສ້າງ Apple ID (iOS) = 35.000₭\n!ຮັບຍ້າຍພາກພື້ນ/ປະເທດ:\n-ຍ້າຍ Gmail ລາວ→ໄທ = 25.000₭\n-ຍ້າຍ Apple ID ລາວ→ໄທ = 15.000₭" },
+    { id:6,  category:"app",   name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"Netflix",         message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ Netflix",         image:"https://cdn.phototourl.com/free/2026-05-26-a2142c1b-1e41-4a95-ba94-0b47a4c0c9cd.jpg", description:"ໃຊ້ໄດ້: ມືຖື / iPad / ຄອມ\n-7 ວັນ = 25.000₭ (ປິດ 30.000₭)\n-30 ວັນ = 75.000₭ (ປິດ 80.000₭)" },
+    { id:7,  category:"app",   name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"iQIYI",           message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ iQIYI",           image:"https://cdn.phototourl.com/free/2026-05-26-0c621a50-de00-43e6-80d8-0312c033a65d.jpg", description:"ຈໍບໍ່ຊົນ ເບິ່ງພ້ອມກັນ 4 ອຸປະກອນ\n-30 ວັນ ຫານ 4 = 30.000₭\n-30 ວັນ ຍົກແອັດ = 85.000₭" },
+    { id:8,  category:"app",   name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"WeTV VIP Standard", message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ WeTV VIP",         image:"https://cdn.phototourl.com/free/2026-05-26-923662de-8ec5-4ec2-a1a4-58ca78174c53.jpg", description:"WeTV VIP Standard\n-30 ວັນ ຫານ 4 = 17.000₭\n-30 ວັນ ຫານ 3 = 30.000₭\n-30 ວັນ ຫານ 2 = 43.000₭\n-30 ວັນ ຍົກແອັດ = 70.000₭" },
+    { id:9,  category:"app",   name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"YOUKU VIP",        message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ YOUKU VIP",        image:"https://cdn.phototourl.com/free/2026-05-26-964d5807-0eae-43cd-823f-876faab1b3bc.jpg", description:"YOUKU VIP\n-7 ວັນ = 15.000₭\n-30 ວັນ ຫານ 4 = 25.000₭\n-30 ວັນ ຫານ 2 = 55.000₭" },
+    { id:10, category:"app",   name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"YouTube Premium",  message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ YouTube Premium",  image:"https://cdn.phototourl.com/free/2026-05-26-e571deac-798c-4979-84ea-0c07239eb9de.jpg", description:"YouTube Premium 30 ມື້\n-ຕໍ່ເມວລູກຄ້າ = 75.000₭\n-ເມວຮ້ານ (ບໍ່ຕໍ່) = 40.000₭" },
+    { id:11, category:"app",   name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"Dramabox",         message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ Dramabox",         image:"https://cdn.phototourl.com/member/2026-05-26-67edf73b-49d9-4aeb-adea-9eef11ef4877.jpg", description:"Dramabox\n-1 ວັນ = 55.000₭\n-3 ວັນ = 80.000₭\n-7 ວັນ = 120.000₭" },
+    { id:12, category:"app",   name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"BILIBILI",         message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ BILIBILI",         image:"https://cdn.phototourl.com/member/2026-05-26-fddf3028-0cb7-4114-b54c-75da261b0556.jpg", description:"BILIBILI\n-7 ວັນ = 15.000₭\n-30 ວັນ ຫານ 4 = 25.000₭\n-30 ວັນ ຫານ 2 = 55.000₭" },
+    { id:13, category:"app",   name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"VIU PREMIUM",      message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ VIU PREMIUM",      image:"https://cdn.phototourl.com/member/2026-05-26-ebdf7e88-2cc5-4d66-807b-091a69b8a83d.jpg", description:"VIU PREMIUM\n-7 ວັນ = 12.000₭\n-30 ວັນ ຫານ 4 = 22.000₭\n-30 ວັນ ຫານ 2 = 40.000₭\n-90 ວັນ ຫານ 4 = 50.000₭\n-30 ວັນ ຍົກແອັດ = 90.000₭" },
+    { id:14, category:"topup", name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"ເຕິມ Free Fire",   message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ ເຕິມ Free Fire",   image:"https://cdn.phototourl.com/member/2026-05-26-a811ea68-6024-4269-b672-e44a201fad4b.jpg", description:"♡︎ເລດເຕີມເກມ FF UID ♡︎\n- 33💎 : 10.000ກີບ\n- 68💎 : 20.000ກີບ\n- 172💎 : 45.000ກີບ\n- 310💎 : 70.000ກີບ\n- 344💎 : 77.000ກີບ\n- 517💎 : 110.000ກີບ\n- 690💎 : 145.000ກີບ\n- 827💎 : 169.000ກີບ\n- 1052💎 : 212.500ກີບ\n- 1224💎 : 238.000ກີບ\n- 1362💎 : 270.000ກີບ\n- 1569💎 : 313.000ກີບ\n- 1801💎 : 340.000ກີບ\n- 2111💎 : 399.000ກີບ\n- 3698💎 : 660.000ກີບ\n- 5499💎 : 999.000ກີບ\n- 7396💎 : 1.350.000ກີບ\n- 11094💎 : 2.000.000ກີບ\n- ບັດປຽ່ນຊື່ : 37.000ກີບ\n- ລາຍອາທິດ : 52.000ກີບ\n- ລາຍອາທິດມິນິ : 33.000ກີບ\n- ລາຍເດືອນ : 205.000ກີບ\n- ເຕີບໂຕລວມ : 77.000ກີບ\n- ເລື່ອນຂັ້ນ : 71.000ກີບ\n- ເຕີບໂຕ Lv1-6 : 11.000ກີບ\n- ເຕີບໂຕ Lv 7-10 : 22.000ກີບ\n- ເຕີບໂຕ Lv 11-15 : 22.000ກີບ\n- ເຕີບໂຕ Lv 16-20 : 22.000ກີບ\n- ເຕີບໂຕ Lv 21-25 : 22.000ກີບ\n- ເຕີບໂຕ Lv 26-30 : 30.000ກີບ•\n❤️ອີໂວພາສ UID FF\n- 3 ວັນ : 44.000ກີບ\n- 7 ວັນ : 55.000ກີບ\n- 30 ວັນ : 169.000ກີບ\n•🫧ໃຊ້ UID ໃນການເຕີມໃຫ້ໄອດີຜິດບໍຮັບຜິດຊອບ\n•🫧ລໍຄິວ 2-10ນາມີ ກາຍໂທ-ແທັກໄດ້🫶🏻" },
+    { id:15, category:"topup", name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"ເຕິມ ROV",         message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ ເຕິມ ROV",         image:"https://cdn.phototourl.com/member/2026-05-26-9449271d-45aa-4362-9b77-da94a1f15606.jpg", description:"ເຕິມ ROV\n-11 Tokens = 10.000₭\n-24 Tokens = 20.000₭\n-60 Tokens = 45.000₭\n-110 Tokens = 70.000₭\n-185 Tokens = 111.000₭\n-370 Tokens = 210.000₭\n-620 Tokens = 345.000₭\n-1240 Tokens = 669.000₭" },
+    {id:16, category:"topup", name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"ເຕິມ Roblox",      message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ ເຕິມ Roblox",      image:"https://cdn.phototourl.com/member/2026-05-26-2fe99bb9-7753-4dfd-9d8c-0b26f6f2e167.jpg", description:"ເຕິມ Roblox\n-80 R$ = 27.000₭\n-160 R$ = 60.000₭\n-240 R$ = 69.000₭\n-320 R$ = 97.000₭\n-400 R$ = 112.000₭\n-500 R$ = 120.000₭\n-1000 R$ = 220.000₭" },
+    { id:17, category:"topup", name:"ກົດເຂົ້າໄປເພື່ອເບິ່ງລາຍລະອຽດ", price:"ເຕິມ Minecraft",   message:"ສະບາຍດີ ຂ້ອຍສົນໃຈ ເຕິມຫລຽນ Minecraft", image:"https://cdn.phototourl.com/member/2026-04-26-7086a017-d2d4-4992-a07b-5d14ea584b38.jpg", description:"ເຕິມຫລຽນ Minecraft\n-320 MC = 55.000₭\n-1020 MC = 130.000₭\n-1720 MC = 179.000₭\n-3500 MC = 299.000₭\n-8800 MC = 666.000₭\n-17600 MC = 1.339.000₭" },
+];
+const gameZone  = document.getElementById("gameZone");
+const appZone   = document.getElementById("appZone");
 const topupZone = document.getElementById("topupZone");
 
-products.forEach(product => {
-
+products.forEach(p => {
     const card = document.createElement("div");
     card.className = "product-card";
-    card.onclick = () => openModal(product);
-
+    card.onclick = () => openModal(p);
     card.innerHTML = `
         <div class="product-image-wrapper">
-    <img src="${product.image}" class="product-image">
-</div>
-        <div class="product-info">
-            <div class="product-name">${product.name}</div>
-            <div class="product-price">${product.price}</div>
+            <img src="${p.image}" class="product-image" alt="${p.price}" loading="lazy">
         </div>
-    `;
+        <div class="product-info">
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">${p.price}</div>
+        </div>`;
 
-    if (product.category === "game") {
-        gameZone.appendChild(card);
-    }
-
-    else if (product.category === "app") {
-        appZone.appendChild(card);
-    }
-
-    else if (product.category === "topup") {
-        topupZone.appendChild(card);
-    }
+    if (p.category === "game")  gameZone.appendChild(card);
+    if (p.category === "app")   appZone.appendChild(card);
+    if (p.category === "topup") topupZone.appendChild(card);
 });
 
+// ===== Modal =====
+function openModal(p) {
+    document.getElementById("modalImg").src       = p.image;
+    document.getElementById("modalTitle").textContent = p.price;
+    document.getElementById("modalPriceTag").textContent = "📦 " + p.price;
 
-    // 3. ฟังก์ชันควบคุม Modal
-    const modal = document.getElementById('productModal');
+    // สีหัว modal ตามหมวด
+    const header = document.getElementById("modalHeader");
+    header.className = "modal-header " + p.category;
 
-    function openModal(product) {
-        document.getElementById('modalTitle').innerText = product.name;
-        document.getElementById('modalPrice').innerText = product.price;
-        document.getElementById('modalDesc').innerText = product.description;
-        document.getElementById('modalImg').src = product.image;
-            const whatsappBtn =
-        document.querySelector('.whatsapp');
-            whatsappBtn.href =
-        "https://wa.me/66649069984?text="+
-        encodeURIComponent(product.message);
-        
-        
+    // แปลง \n เป็นบรรทัด สวยงาม
+    const descEl = document.getElementById("modalDesc");
+    descEl.innerHTML = "";
+    const lines = p.description.split("\n").filter(l => l.trim() !== "");
+    lines.forEach(line => {
+        const div = document.createElement("div");
+        div.className = "desc-line";
 
-        
-            modal.style.display = "flex";
-    }
+        const isNote   = line.startsWith("!");
+        const isHeader = !line.startsWith("-") && !line.startsWith("!");
 
-    function closeModal() {
-        modal.style.display = "none";
-    }
+        if (isNote)   div.classList.add("is-note");
+        if (isHeader && lines.indexOf(line) > 0) div.classList.add("is-header");
 
-    // ปิด Modal เมื่อคลิกพื้นที่ว่างข้างนอก
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            closeModal();
-        }
-    }
-    
+        const dot = document.createElement("span");
+        dot.className = "desc-dot";
+
+        const text = document.createElement("span");
+        // ລຶບ prefix -, ! ອອກ
+        text.textContent = line.replace(/^[-!•♡]\s*/, "");
+
+        div.appendChild(dot);
+        div.appendChild(text);
+        descEl.appendChild(div);
+    });
+
+    // WhatsApp link + message
+    const msg = encodeURIComponent(p.message || "ສະບາຍດີ ສົນໃຈ " + p.price);
+    document.getElementById("modalWhatsApp").href = `https://wa.me/66649069984?text=${msg}`;
+
+    const modal = document.getElementById("productModal");
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+    document.getElementById("productModal").classList.remove("active");
+    document.body.style.overflow = "";
+}
+
+function handleModalClick(e) {
+    if (e.target === document.getElementById("productModal")) closeModal();
+}
+
+// Keyboard close
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+// ===== Category filter =====
+function showZone(type) {
+    ["game","app","topup"].forEach(z => {
+        document.getElementById(z+"Zone").style.display = z===type ? "grid" : "none";
+    });
+    document.querySelector(".game-title").style.display  = type==="game"  ? "inline-block" : "none";
+    document.querySelector(".app-title").style.display   = type==="app"   ? "inline-block" : "none";
+    document.querySelector(".topup-title").style.display = type==="topup" ? "inline-block" : "none";
+}
+
+function goHome() {
+    ["game","app","topup"].forEach(z => {
+        document.getElementById(z+"Zone").style.display = "grid";
+    });
+    document.querySelector(".game-title").style.display  = "inline-block";
+    document.querySelector(".app-title").style.display   = "inline-block";
+    document.querySelector(".topup-title").style.display = "inline-block";
+}
 </script>
-
 </body>
 </html>
